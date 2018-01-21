@@ -1,0 +1,63 @@
+﻿@model FinancialPortal.Models.RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+
+<div class="wrapper full-page-wrapper page-auth page-login text-center">
+    <div class="inner-page">
+        <div class="animated fadeInDown center-block" id="logInBox" style="-webkit-animation-delay: 1s; -ms-animation-delay: 1s; -moz-animation-delay: 1s">
+
+            <h4 style="font-family: Rock Salt; font-weight: bold; font-size: 1.5em">SWEEP THE CHANGE</h4><br />
+            <h4>Create Account</h4>
+
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @*<h4>Create a new account.</h4>*@
+                <hr />
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.FirstName, new { @class = "col-md-3 control-label" })*@
+                    <div class="col-md-offset-2 col-md-8">
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.LastName, new { @class = "col-md-3 control-label" })*@
+                    <div class="col-md-offset-2 col-md-8">
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" , @placeholder = "Last Name" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.Email, new { @class = "col-md-3 control-label" })*@
+                    <div class="col-md-offset-2 col-md-8">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "EMail"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.Password, new { @class = "col-md-3 control-label" })*@
+                    <div class="col-md-offset-2 col-md-8">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder="Password" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-3 control-label" })*@
+                    <div class="col-md-offset-2 col-md-8">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder="Confirm Password" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        @*<input type="submit" id="logInBtn" class="btn btn-default" value="Register"  />*@
+                        <button class="btn btn-custom-primary btn-lg btn-block btn-auth logInBtn" @*id="logInBtn"*@><i class="fa fa-arrow-circle-o-right"></i> Register</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

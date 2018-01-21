@@ -1,0 +1,114 @@
+﻿@model FinancialPortal.Models.Transactions
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+@Html.HiddenFor(m => m.TransactionType.Name)
+
+@*<div style="text-align: left">
+    <h3 id="dashHeading">Transaction Details</h3>
+</div>
+<br />*@
+
+<div class="main-header">
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Transaction</h2>
+            <em>Details</em>
+        </div>
+    </div>
+</div>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Account
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.Name)
+        </dd>
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifyDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyDate)
+        </dd>
+
+        <dt>
+            Transaction Amount 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.EnteredById)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnteredById)
+        </dd>*@
+
+        <dt>
+            Reconciled
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsReconciled)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ReconciledAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReconciledAmount)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ExcludeBudgetItem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExcludeBudgetItem)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "AccountTrans", new { id = Model.AccountId }) 
+</p>

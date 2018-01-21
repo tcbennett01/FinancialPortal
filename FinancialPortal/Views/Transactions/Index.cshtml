@@ -1,0 +1,196 @@
+﻿@model IEnumerable<FinancialPortal.Models.Transactions>
+
+@*@{
+        ViewBag.Title = "Index";
+    }*@
+
+@*<h1 id="dashHeading">MONTHLY OVERVIEW</h1>*@
+<br />
+
+<!-- main -->
+<div class="content">
+    <div class="main-header">
+        <br />
+        <div class="row">
+            <div class="col-md-10">
+                <h2>Household</h2>
+                <em>Overview</em>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        @*<table class="table">*@
+        <div class="row">
+            @*<div class="col-md-4">
+                    <h4 id="dashBox1">Total Assets: <span id="acc"></span></h4>
+                </div>*@
+            <div class="col-md-3" style="text-align: center">
+                <div class="col-md-12" id="dashBox1" style="color: #fff; font-weight: bolder">
+                    <h3>ASSETS</h3>
+                    <h3><span id="acc"></span></h3>
+                </div>
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <div class="col-md-12" id="dashBox2" style="color: #fff; font-weight: bolder">
+                    <h3>BUDGET</h3>
+                    <h3><span id="bud"></span></h3>
+                </div>
+            </div>
+            <div class="col-md-3" style="text-align: center">
+                <div class="col-md-12" id="dashBox3" style="color: #fff; font-weight: bolder">
+                    <h3>EXPENSES</h3>
+                    <h3><span id="exp"></span></h3>
+                </div>
+            </div>
+        </div><br /><br />
+        <div class="widget widget-table">
+            <div class="widget-header table-title">
+                <h3><i class="fa fa-table"></i>Recent Transactions MTD</h3>
+            </div>
+            <div class="widget-content">
+                <table id="featured-datatable" class="table @*table-sorting*@ table-striped table-bordered table-hover dataTable ">
+                    <thead>
+                        <tr class="tableHeader">
+                            @*<tbody>
+                                    <tr>
+                                        <td>Minimum age:</td>
+                                        <td><input type="text" id="min" name="min"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maximum age:</td>
+                                        <td><input type="text" id="max" name="max"></td>
+                                    </tr>
+                                </tbody>*@
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Account
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Credits
+                            </th>
+                            <th>
+                                Debits
+                            </th>
+                            <th>
+                                Reconciled
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Deleted == false)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreateDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Account.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.Name)
+                                    </td>
+
+                                    <td>
+                                        @if (item.TransactionTypeId == 1)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        }
+                                        @if (item.TransactionTypeId == 3 && item.CategoryId < 7)
+                                        {
+                                            <strike>@Html.DisplayFor(modelitem => item.VoidAmount)</strike><span style="font-size: .85em; font-weight: bold"> Void</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.TransactionTypeId == 2)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        }
+                                        @if (item.TransactionTypeId == 3 && item.CategoryId >= 7)
+                                        {
+                                            <strike>@Html.DisplayFor(modelitem => item.VoidAmount)</strike><span style="font-size: .85em; font-weight: bold"> Void</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsReconciled)
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        </div>
+    </div>
+        <br /><br /><br />
+
+
+        @section scripts {
+            <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    $.post('@Url.Action("GetChart", "Home")').then(function (response) {
+
+                        //$('#exp').text('-$' + response.totalExpense);
+                        //$('#bud').text('$' + response.totalBudget);
+                        $("#exp").text('-$' + parseFloat(response.totalExpense, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                        $("#bud").text('-$' + parseFloat(response.totalBudget, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                        $("#acc").text('$' + parseFloat(response.totalAcc, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                        new Morris.Bar({
+                            // ID of the element in which to draw the chart.
+                            element: 'chart1',
+                            // Chart data records -- each entry in this array corresponds to a point on
+                            // the chart.
+                            data: response.bar,
+                            // The name of the data record attribute that contains x-values.
+                            xkey: 'Name',
+                            // A list of names of data record attributes that contain y-values.
+                            ykeys: ['Actual', 'Budgeted'],
+                            // Labels for the ykeys -- will be displayed when you hover over the
+                            // chart.
+                            labels: ['Expenses to Date', 'Amount Budgeted'],
+                            resize: true
+                        });
+                        new Morris.Donut({
+                            element: 'chart2',
+                            data: response.donut,
+                            //label: 'Name',
+                            //value: 'Value',
+                            resize: true
+                        });
+                    });
+
+                    $.post('@Url.Action("GetMonthly","Home")').then(function (response) {
+                        console.log(response);
+                        new Morris.Bar({
+                            // ID of the element in which to draw the chart.
+                            element: 'MonthlyChart',
+                            // Chart data records -- each entry in this array corresponds to a point on
+                            // the chart.
+                            data: response,
+                            // The name of the data record attribute that contains x-values.
+                            xkey: 'month',
+                            // A list of names of data record attributes that contain y-values.
+                            ykeys: ['income', 'expense', 'budget'],
+                            // Labels for the ykeys -- will be displayed when you hover over the
+                            // chart.
+                            labels: ['Income to Date', 'Expenses to Date', 'Amount Budgeted'],
+                            resize: true
+                        });
+                    });
+
+                });
+            </script>
+        }

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<FinancialPortal.Models.Invitations>
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+@*<div style="text-align: left">
+    <h3 id="dashHeading">Invitations Sent</h3>
+</div>*@
+<div class="main-header">
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Invitations</h2>
+            <em>Sent</em>
+        </div>
+    </div>
+</div>
+<hr />
+<br />
+
+<div class="widget widget-table">
+    <div class="widget-header table-title">
+        <h3><i class="fa fa-table"></i></h3>
+    </div>
+    <div class="widget-content">
+        <table id="featured-datatable" @*id="table-hover"*@ class="table @*table-sorting*@ table-striped table-bordered table-hover dataTable ">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Household.Name)
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.InvCd)
+                    </th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.InviteCreated)*@
+                        Registered
+                    </th>
+                    <th>
+                        Modified
+                    </th>
+                    <th>
+                        Invitation Expiration
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Household.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InviteEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InvCd)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.InviteCreated, "{0:MM/dd/yyyy}")*@
+                            @*@item.InviteCreated.ToString("MM/dd/yyyy")*@
+                            @Html.DisplayFor(modelItem => item.IsRegistered)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.InviteModified, "{0:dd-MM-yyyy}")*@
+                            @item.InviteModified.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.InviteExpiration)*@
+                            @item.InviteExpiration.ToString("MM/dd/yyyy")
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                            @*@Html.ActionLink("Details", "Details", new { id = item.Id }) |*@
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br /><br />
+
+</table>

@@ -1,0 +1,117 @@
+﻿@model FinancialPortal.Models.Transactions
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+@Html.HiddenFor(model => model.TransactionType.Id)
+@Html.HiddenFor(model => model.TransactionType.Name)
+
+@*<div style="text-align: left">
+    <h3 id="dashHeading">Delete Transaction</h3>
+</div>
+<br />*@
+
+<div class="main-header">
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Transaction</h2>
+            <em>Delete</em>
+        </div>
+    </div>
+</div>
+
+<h3>Are you sure you want to delete this transaction?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Account
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.Name)
+        </dd>
+
+        <dt>
+            Category
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+        <dt>
+            Modify Date
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifyDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.EnteredById)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnteredById)
+        </dd>*@
+
+        <dt>
+            Reconciled
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsReconciled)
+        </dd>
+
+        <dt>
+            Voided
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVoid)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-offset-1 form-actions no-color">
+            <h5>Note:  Deleting a transactoin cannot be reversed.</h5>
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+        <br />
+        <div class="col-md-offset-1">
+            @Html.ActionLink("Back to List", "AccountTrans", new { id = Model.AccountId }) 
+        </div>
+    }
+</div>

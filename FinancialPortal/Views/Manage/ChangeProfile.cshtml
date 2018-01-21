@@ -1,0 +1,49 @@
+﻿@model FinancialPortal.Models.ChangeProfileViewModel
+
+@*@{
+    ViewBag.Title = "Change Profile";
+}*@
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+<div style="text-align: left">
+    <h3 id="dashHeading">Change Profile</h3>
+</div>
+<br />
+
+@using (Html.BeginForm("ChangeProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("First Name: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Last Name: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.LastName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Email: ", new { @class = "col-md-2 control-label" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Email, new { @class = "form-control" })
+        </div>
+    </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6">
+                    <input type="submit" value="Submit Changes" class="btn btn-default" />
+                </div>
+            </div>
+}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

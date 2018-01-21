@@ -1,0 +1,281 @@
+
+body{
+    /*background-color: #ffedb3;*/
+    /*background-color: #e6ffe6;*/
+    background-color: #ffefcc;
+}
+
+select.form-control{
+    background-color: #fff;
+}
+
+.content-wrapper{
+    border-left: none;
+    /*background-color: #ffedb3;*/
+    background-color: #e6ffe6;
+    background-color: #ffefcc;
+}
+#landingPage {
+    background: url(../coins_texture_ultra.jpg) center center no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100vh;
+    min-height:500px;
+    position:relative;
+    /*margin-top: -55px;*/
+}
+#bg-image {
+    background: url(../coins_texture_ultra.jpg) center center no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100vh;
+    min-height:500px;
+    position:relative;
+    /*margin-top: -55px;*/
+}
+
+/*.top-bar navbar-fixed-top{
+    background:transparent;
+    -webkit-transition:background 0.3s ease-out;
+    transition:background 0.3s ease-out;
+}*/
+
+body.topnav-fixed #wrapper{
+    padding-top: 10px;
+}
+
+ul.main-menu > li .fa {
+    font-size: 1.35em;
+}
+
+ul.main-menu > li .text {
+    font-size: 1em;
+}
+
+#dashHeading{
+    font-weight: bolder;
+    color: #0e7d8b;
+    font-family: "latobold";
+    /*letter-spacing: 0.1em;*/
+    font-size: 4em;
+    text-shadow: 3px 3px 3px #084951;
+}
+
+#budSubmit{
+    background-color: #0e7d8b;
+    opacity: 0.8;
+}
+.btn a{
+    color: #fff;
+    background-color: #0e7d8b;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    opacity: 0.8;
+}
+.btn a:hover, #budSutmit{
+    color: #fff;
+    background-color: #0e7d8b;
+    text-decoration: none;
+    opacity: 1;
+}
+
+.btn-default{
+    color: #fff;
+    font-weight: bolder;
+    background-color: #0e7d8b;
+    border: none; 
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+.btn-default:hover{
+    color: #fff;
+    font-weight: bolder;
+    background-color: #0e7d8b;
+    border: none; 
+    opacity: 1;
+}
+
+/*.left-sidebar, ul.main-menu > li a{
+    background-color: #e6ffe6;
+}*/
+/*#budSubmit{
+    color: #fff; 
+    opacity: 0.6;
+}*/
+
+
+#dashBox1{
+    background-color: #28d79d;
+}
+#donutSize svg{
+    min-height: 400px;
+}
+
+#donutSizeExpense svg{
+    min-height: 365px;
+}
+
+#dashBox1 h3, 
+#dashBox2 h3, 
+#dashBox3 h3,{
+    font-weight: bolder;
+    color: black;
+}
+
+#dashBox2{
+    background-color: #1aa3ff;
+
+}
+
+#dashBox3{
+    background-color: #cc0000;
+
+}
+
+.pageHeader{
+    color: #1fa67a;
+    font-weight: bold;
+}
+#assignUsersButton,
+#ticketEditBtn,
+#createTicketBtn,
+.ticketDetailsSubmit,
+#createProjectBtn,
+#editProjectBtn, 
+#roleMgmtUpdate{
+    font-weight: bold;
+    background-color: #0f8897;
+    opacity: 0.7;
+    border-radius:  7px;
+    color: #fff;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+}
+#assignUsersButton:hover,
+#ticketEditBtn:hover,
+#createTicketBtn:hover,
+.ticketDetailsSubmit:hover,
+#createProjectBtn:hover,
+#editProjectBtn:hover, 
+#roleMgmtUpdate:hover{
+    font-weight: bold;
+    /*background-color: #084951;*/
+    background-color: #0f8897;
+    opacity: 1;
+    color: #fff;
+    font-size: 1em;
+    letter-spacing: 0.1em;
+}
+.breadcrumb{
+    font-size: 1em;
+}
+.btn-xs{
+    min-width: 50px;
+    border-radius: 5px;
+}
+.btn-xs a{
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+
+}
+#createTicket, 
+#createProject{
+    border-radius: 5px;
+}
+#createTicket a, 
+#createTicket i,
+#createProject a,
+#createProject i{
+    color: #fff;
+    font-size: .9em;
+    letter-spacing: 0.1em;
+    font-weight: bolder;
+    opacity: .7;
+}
+#createTicket a:hover,
+#createProject a:hover{
+    text-decoration: none;
+    color: #fff;
+    opacity: 1;
+}
+.custom-header{
+    font-weight: bold;
+    background-color: #084951;
+    color: #fff;
+}
+hr{
+    color: #0d737f;
+    border: 1px solid #084951;
+    opacity: .3; 
+}
+.table-title{
+    font-size: 1.4em;
+}
+.tableHeader th{
+    font-size: 1.2em;
+}
+.dataTables_length label, 
+.dataTables_filter label, 
+.dataTables_info, 
+.dataTables_paginate{
+    font-size: 1.1em
+}
+dt, label{
+    color: #084951;
+    font-weight: bold; 
+}
+em{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.logged-user a {
+    color: #fff;
+}
+.logged-user a:hover {
+    opacity: .5;
+}
+.main-header h2, h4{
+    color: #fff;
+    font-weight: bold;
+}
+.main-header h2{
+    border-right-color: #084951;
+}
+.nav > li > a, .nav > li > a{
+    background-color: #1fa67a;
+    opacity: .7;
+}
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #1fa67a;
+    color: #fff;
+    opacity: 1;
+}
+.ticketDetailsHeader, .projectDetailsHeader{
+    color: #084951;
+}
+/*.ticketDetailsSubmit{
+    background-color: #0f8897;
+    border-radius: 10px;
+    font-size: 1em;
+    opacity: 0.7;
+}*/
+#TicketTypeId, 
+#ProjectId,
+#TicketPriorityId,
+#TicketStatusId,
+#AssignedToUserId {
+    background-color: #fff;
+}
+#pmId1,
+#pmId2 {
+    background-color: #fff;
+}
+.widget .widget-header {
+    background-color: #737373;
+  border-bottom-color: #195872;
+  color: #fff;
+}

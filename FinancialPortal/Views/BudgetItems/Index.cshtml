@@ -1,0 +1,170 @@
+﻿@model IEnumerable<FinancialPortal.Models.BudgetItems>
+
+@*@{
+    ViewBag.Title = "Index";
+}*@
+
+<style>
+    footer{
+        display: none;
+    }
+</style>
+@*<div style="text-align: center">
+    <h1 id="dashHeading">HOUSE BUDGET</h1>
+</div>
+<br /><br />*@
+<div class="main-header">
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Household</h2>
+            <em>Budget</em>
+        </div>
+    </div>
+</div>
+
+
+@*<table class="table">*@
+<div class="row" style="margin-bottom: 5px">
+    <div class="col-md-6"></div>
+    <div class="col-md-6">
+    <button id="budSubmit" class="btn pull-right" @*style="background-color: #0e7d8b"*@>
+        @Html.ActionLink("Add Budget Item", "Create")
+    </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget" id="donutSize">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <h3 style="color: #fff; font-size: 1.17em">Budget Graph</h3>
+                @*<span class="widget-caption">Budget</span>*@
+            </div>
+            <div class="widget-body">
+                <div id="Budget">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="widget widget-table">
+            <div class="widget-header table-title">
+                <h3><i class="fa fa-table"></i>Budget Items</h3>
+            </div>
+            <div class="widget-content">
+                <table @*id="featured-datatable"*@ class="table-condensed @*table-sorting*@ table-striped table-bordered table-hover dataTable ">
+                    <thead>
+                        <tr class="tableHeader">
+                        <tr>
+                            @*<th>
+                                @Html.DisplayNameFor(model => model.Budget.Name)
+                            </th>*@
+                            <th>
+                                @Html.DisplayNameFor(model => model.Category.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Amount)
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.CategoryId >= 7)
+                            {
+                                <tr>
+                                    @*<td>
+                                        @Html.DisplayFor(modelItem => item.Budget.Name)
+                                    </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+                                    @*<td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                    </td>*@
+                                    <td style="font-size: 1.25em">
+                                        <a href="@Url.Action("Edit", "BudgetItems", new { id = item.Id})" class="fa fa-edit"></a> |
+                                        <a href="@Url.Action("Delete", "BudgetItems", new { id = item.Id})" class="fa fa-trash"></a>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br />
+
+
+@section scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        //$(function(){
+        $(document).ready(function () {
+            $.post('@Url.Action("GetChart","Home")').then(function (response) {
+                //new Morris.Donut({
+                //    element: 'Expense',
+                //    data: response.donutExpense,
+                //    resize: true,
+                //    colors: ['#ff6666',
+                //             '#ff4d4d',
+                //             '#ff3333',
+                //             '#ff1a1a',
+                //             '#ff0000',
+                //             '#e60000',
+                //             '#cc0000',
+                //             '#b30000',
+                //             '#990000']
+                //});
+                new Morris.Donut({
+                    element: 'Budget',
+                    data: response.donutBudget,
+                    resize: true,
+                    colors: ['#99d6ff',
+                             '#80ccff',
+                             '#66c2ff',
+                             '#4db8ff',
+                             '#33adff',
+                             '#1aa3ff',
+                             '#0099ff',
+                             '#008ae6',
+                             '#007acc']
+                });
+
+                //new Morris.Bar({
+                //    // ID of the element in which to draw the chart.
+                //    element: 'chart1',
+                //    // Chart data records -- each entry in this array corresponds to a point on
+                //    // the chart.
+                //    data: response.bar,
+                //    // The name of the data record attribute that contains x-values.
+                //    xkey: 'Name',
+                //    // A list of names of data record attributes that contain y-values.
+                //    ykeys: ['Actual', 'Budgeted'],
+                //    // Labels for the ykeys -- will be displayed when you hover over the
+                //    // chart.
+                //    labels: ['Expenses to Date', 'Amount Budgeted'],
+                //    resize: true,
+                //    barColors: ['#ff1a1a', '#008ae6']
+
+                //});
+            });
+        });
+    </script>
+}

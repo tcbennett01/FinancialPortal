@@ -1,0 +1,66 @@
+﻿@model FinancialPortal.Models.Invitations
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Invitations</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Household.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Household.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InviteEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InviteEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InvCd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InvCd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InviteCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InviteCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InviteModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InviteModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InviteExpiration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InviteExpiration)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

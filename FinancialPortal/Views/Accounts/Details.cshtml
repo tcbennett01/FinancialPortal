@@ -1,0 +1,65 @@
+﻿@model FinancialPortal.Models.Accounts
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+<div style="text-align: left">
+    <h3 id="dashHeading">Account Details</h3>
+</div>
+<br />
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Household.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Household.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReconciledBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReconciledBalance)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsArchived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsArchived)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,169 @@
+﻿@model IEnumerable<FinancialPortal.Models.BudViewMod>
+
+@{
+    ViewBag.Title = "GetChart";
+}
+
+<h2>ChartTest</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Expenses</span>
+            </div>
+            <div class="widget-body">
+                <div id="Expense">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Budget</span>
+            </div>
+            <div class="widget-body">
+                <div id="Budget">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @*<div id="chart1" style="height: 250px" class="col-md-6">
+
+        </div>
+        <div class="col-md-6"></div>*@
+    <div class="col-md-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-black">
+                <span class="widget-caption"> Actual vs. Budget</span>
+            </div>
+            <div class="widget-body">
+                <div id="chart1"> </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="widget widget-table">
+            <div class="widget-header table-title">
+                <h3><i class="fa fa-table"></i>MONTHLY EXPENSES</h3>
+            </div>
+            <div class="widget-content">
+                <table @*id="featured-datatable"*@ class="table-condensed @*table-sorting*@ table-striped table-bordered table-hover dataTable ">
+                    <thead>
+                        <tr class="tableHeader">
+                        <tr>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Actual
+                            </th>
+                            <th>
+                                Budget
+                            </th>
+                            <th>
+                                Budget %
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Category)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpenseAct)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BudgetEst)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpPct)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <br /><br />
+</div>
+
+
+<br />
+
+@*@Scripts.Render("~/bundles/jquery")*@  <!--Commented out as doesn't make a difference-->
+
+@section scripts{
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script>
+        //$(function(){
+        $(document).ready(function () {
+            $.post('@Url.Action("GetChart","Home")').then(function (response) {
+                new Morris.Donut({
+                    element: 'Expense',
+                    data: response.donutExpense,
+                    resize: true,
+                    colors: ['#ff6666',
+                             '#ff4d4d',
+                             '#ff3333',
+                             '#ff1a1a',
+                             '#ff0000',
+                             '#e60000',
+                             '#cc0000',
+                             '#b30000',
+                             '#990000']
+                });
+                new Morris.Donut({
+                    element: 'Budget',
+                    data: response.donutBudget,
+                    resize: true,
+                    colors: ['#99d6ff',
+                             '#80ccff',
+                             '#66c2ff',
+                             '#4db8ff',
+                             '#33adff',
+                             '#1aa3ff',
+                             '#0099ff',
+                             '#008ae6',
+                             '#007acc']
+                });
+
+                new Morris.Bar({
+                    // ID of the element in which to draw the chart.
+                    element: 'chart1',
+                    // Chart data records -- each entry in this array corresponds to a point on
+                    // the chart.
+                    data: response.bar,
+                    // The name of the data record attribute that contains x-values.
+                    xkey: 'Name',
+                    // A list of names of data record attributes that contain y-values.
+                    ykeys: ['Actual', 'Budgeted'],
+                    // Labels for the ykeys -- will be displayed when you hover over the
+                    // chart.
+                    labels: ['Expenses to Date', 'Amount Budgeted'],
+                    resize: true,
+                    barColors: ['#ff1a1a', '#008ae6']
+
+                });
+            });
+        });
+    </script>
+}
+

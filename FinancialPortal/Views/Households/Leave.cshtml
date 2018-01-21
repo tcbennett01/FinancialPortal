@@ -1,0 +1,55 @@
+﻿@model FinancialPortal.Models.Households
+
+<style>
+    footer {
+        display: none;
+    }
+</style>
+
+@*<div style="text-align: left">
+    <h3 id="dashHeading">Leave Household</h3>
+</div>
+<br />*@
+
+<div class="main-header">
+    <br />
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Household</h2>
+            <em>Leave</em>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <hr />
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-6">
+                    <p>Are you sure you wan to leave the following house: <span>@ViewBag.HouseName</span>?</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-1 col-md-6">
+                    <input type="checkbox" name="leaveConfirmation" value="true" class="col-md-offset-1 col-md-1" />
+                    <p class="col-md-9">I understand that I will no longer be able to access my household accounts.</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Leave" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@

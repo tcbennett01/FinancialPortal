@@ -1,0 +1,218 @@
+﻿@model IEnumerable<FinancialPortal.Models.Transactions>
+
+
+
+
+<div class="content">
+    <div class="main-header">
+        <br /><br />
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Account Details</h2>
+                <em>@ViewBag.AcctName</em>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("New Transaction", "Create" )
+</p>
+<div class="row">
+    <div class="col-md-10">
+        <div class="widget widget-table">
+            <div class="widget-header table-title">
+                <h3><i class="fa fa-table"></i>Account Balance: <span> @((ViewBag.Bal).ToString("C2")) </span></h3>
+            </div>
+            <div class="widget-content">
+                <table id="featured-datatable" class="table @*table-sorting*@ table-striped table-bordered table-hover dataTable ">
+                    <thead>
+                        <tr class="tableHeader">
+                            @*<tbody>
+                                    <tr>
+                                        <td>Minimum age:</td>
+                                        <td><input type="text" id="min" name="min"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maximum age:</td>
+                                        <td><input type="text" id="max" name="max"></td>
+                                    </tr>
+                                </tbody>*@
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            @*<th>
+                                    Account
+                                </th>*@
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Credits
+                            </th>
+                            <th>
+                                Debits
+                            </th>
+                            <th>
+                                Reconciled
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Deleted == false)
+                            {
+
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CreateDate)
+                                    </td>
+                                    @*<td>
+                                            @Html.DisplayFor(modelItem => item.Account.Name)
+                                        </td>*@
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Category.Name)
+                                    </td>
+
+                                    <td>
+                                        @if (item.TransactionTypeId == 1)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        }
+                                        @if (item.TransactionTypeId == 3 && item.CategoryId < 7)
+                                        {
+                                            <strike>@Html.DisplayFor(modelitem => item.VoidAmount)</strike><span style="font-size: .85em; font-weight: bold"> Void</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.TransactionTypeId == 2)
+                                        {
+                                            @Html.DisplayFor(modelItem => item.Amount)
+                                        }
+                                        @if (item.TransactionTypeId == 3 && item.CategoryId >= 7)
+                                        {
+                                            <strike>@Html.DisplayFor(modelitem => item.VoidAmount)</strike><span style="font-size: .85em; font-weight: bold"> Void</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.IsReconciled)
+                                    </td>
+                                    @*<td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Void", "Void", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>*@
+
+                                    @if (item.IsVoid == false)
+                                    {
+                                        <td style="font-size: 1.25em">
+                                            <a href="@Url.Action("Details", "Transactions", new { id = item.Id })" class="fa fa-list" data-toggle="tool-tip" title="Transaction Details"></a> |
+                                            <a href="@Url.Action("Edit", "Transactions", new { id = item.Id })" class="fa fa-edit" data-toggle="tool-tip" title="Edit Transaction"></a> |
+                                            <a href="@Url.Action("Void", "Transactions", new { id = item.Id })" class="fa fa-ban" data-toggle="tool-tip" title="Void Transaction"></a> |
+                                            <a href="@Url.Action("Delete", "Transactions", new { id = item.Id })" class="fa fa-trash" data-toggle="tool-tip" title="Delete Transaction"></a>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="font-size: 1.25em">
+                                            <a href="@Url.Action("Void", "Transactions", new { id = item.Id })" class="fa fa-undo" data-toggle="tool-tip" title="Undo Void"></a>
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br />
+
+@*@Scripts.Render("~/bundles/jquery")*@
+
+@*@section scripts{
+        <script>
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = parseInt( $('#min').val(), 10 );
+                var max = parseInt( $('#max').val(), 10 );
+                var age = parseFloat( data[2] ) || 0; // use data for the age column
+
+                if ( ( isNaN( min ) && isNaN( max ) ) ||
+                        ( isNaN( min ) && age <= max ) ||
+                        ( min <= age   && isNaN( max ) ) ||
+                        ( min <= age   && age <= max ) )
+                {
+                    return true;
+                }
+                return false;
+            }
+        );
+        </script>
+    }*@
+
+@section scripts {
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.post('@Url.Action("GetChart", "Home")').then(function (response) {
+
+                $('#exp').text('$' + response.totalExpense);
+                $('#bud').text('$' + response.totalBudget);
+                //$('#acc').text('$' + response.totalAcc.toFixed(2));
+                $("#acc").text('$' + parseFloat(response.totalAcc, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                //$(".totalSum").text('$' + parseFloat(total, 10).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,").toString());
+                //new Morris.Bar({
+                //    // ID of the element in which to draw the chart.
+                //    element: 'chart1',
+                //    // Chart data records -- each entry in this array corresponds to a point on
+                //    // the chart.
+                //    data: response.bar,
+                //    // The name of the data record attribute that contains x-values.
+                //    xkey: 'Name',
+                //    // A list of names of data record attributes that contain y-values.
+                //    ykeys: ['Actual', 'Budgeted'],
+                //    // Labels for the ykeys -- will be displayed when you hover over the
+                //    // chart.
+                //    labels: ['Expenses to Date', 'Amount Budgeted'],
+                //    resize: true
+                //});
+                //new Morris.Donut({
+                //    element: 'chart2',
+                //    data: response.donut,
+                //    //label: 'Name',
+                //    //value: 'Value',
+                //    resize: true
+                //});
+            });
+
+            @*$.post('@Url.Action("GetMonthly","Home")').then(function (response) {
+                console.log(response);
+                new Morris.Bar({
+                    // ID of the element in which to draw the chart.
+                    element: 'MonthlyChart',
+                    // Chart data records -- each entry in this array corresponds to a point on
+                    // the chart.
+                    data: response,
+                    // The name of the data record attribute that contains x-values.
+                    xkey: 'month',
+                    // A list of names of data record attributes that contain y-values.
+                    ykeys: ['income', 'expense', 'budget'],
+                    // Labels for the ykeys -- will be displayed when you hover over the
+                    // chart.
+                    labels: ['Income to Date', 'Expenses to Date', 'Amount Budgeted'],
+                    resize: true
+                });
+            });*@
+        });
+    </script>
+}

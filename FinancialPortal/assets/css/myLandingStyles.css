@@ -1,0 +1,106 @@
+﻿body{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.nav > li > a, .nav > li > a{
+    /*background-color: #1fa67a;*/
+    background-color: #28d79d;
+    opacity: 1;
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.nav > li > a:focus, .nav > li > a:hover {
+    /*background-color: #1fa67a;*/
+    background-color: #28d79d;
+    color: #fff;
+    opacity: 1;
+    text-decoration: underline;
+    
+}
+
+.top-bar{
+    background-color: #28d79d;
+}
+h1, h2, h3{
+    font-family: Rock Salt;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+h1 {
+    font-size: 5.5em;
+}
+h2{
+    font-size: 4em;
+    padding-bottom: 10px;
+}
+h3{
+    font-size: 2em;
+}
+
+#appHeading{
+    margin-top: 150px;
+    border: 2px solid #fff;
+    border-radius: 25px;
+    background-color: #28d79d;
+    opacity: 0.92;
+}
+
+.row{
+    margin: 0px;
+}
+
+#logInBox{
+    margin-top: 2%;
+    border-radius: 25px;
+    background-color: #28d79d;
+    opacity: 0.9;
+}
+
+#logInBox h4{
+    text-align: center;
+    
+}
+
+.logInBtn{
+    background-color: #fff;
+    opacity: 1;
+    color: #0e7d8b;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.logInBtn:hover{
+    background-color: #0e7d8b;
+    opacity: 1;
+    color: #fff;
+    border-radius: 10px;
+}
+
+
+form {
+    display: inline;
+    margin-right: 0px;
+}
+
+a{
+    color: #fff;
+}
+
+.checkbox label{
+    color: #fff;
+}
+@media screen and (min-width: 768px) {
+   .page-auth .center-block {
+    width: 55%;
+  }
+}
+@media screen and (min-width: 992px) {
+   .page-auth .center-block {
+    width: 30%;
+  }
+}
